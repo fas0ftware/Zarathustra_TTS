@@ -16,14 +16,18 @@ It uses neural text-to-speech (Edge-TTS) to produce natural-sounding narration f
 - **Long-form input:** Processes full scripts (essays, summaries) in a single run, without a manual character limit.
 - **Modular design:** The engine is a class in `voice_engine.py`, so other scripts can import and reuse it.
 - **Default persona:** `en-GB-RyanNeural` (British English), an academic and authoritative tone. Easy to swap.
+- **Command-line options:** Choose the input file, output file, voice, speed and pitch without editing code.
+- **Clear failures:** A missing or empty script, or a network problem, prints an error and exits with a non-zero code, so pipelines can detect it.
 
 ## ◼ Project structure
 
 ```
 Zarathustra_TTS/
-├── voice_engine.py   # Core TTS logic and voice configuration
-├── main.py           # Entry point: reads script.txt, generates audio
-├── script.txt        # Your input text (local file, not tracked by git)
+├── voice_engine.py   # Core TTS logic (VoiceEngine class)
+├── main.py           # Command-line entry point
+├── script.txt        # Sample input text, replace it with your own
+├── tests/
+│   └── test_engine.py
 └── requirements.txt  # Dependencies
 ```
 
@@ -63,37 +67,54 @@ pip install -r requirements.txt
 
 ## ◼ Usage
 
-1. Put your text in `script.txt` (plain text, one file).
+1. Put your text in `script.txt` (plain UTF-8 text). The repository ships a short sample there; replace it with your own script.
 2. Run:
 
 ```bash
 python main.py
 ```
 
-The narration is saved as an MP3 file. The output name and location are set in `main.py`.
+The narration is saved as `narration.mp3` in the current folder. Options:
+
+```bash
+python main.py my_essay.txt -o audio/essay.mp3 --voice en-US-GuyNeural --rate "+10%" --pitch "-5Hz"
+python main.py --help
+```
 
 ### Changing the voice
 
-The default voice is set in `voice_engine.py`. To see every available voice:
+The default voice is `en-GB-RyanNeural`. To see every available voice:
 
 ```bash
 edge-tts --list-voices
 ```
 
-Copy the name of the voice you want (for example `en-US-GuyNeural`) into the voice setting in `voice_engine.py`.
+Pass the name you want with `--voice` (for example `en-US-GuyNeural`), or change `DEFAULT_VOICE` in `voice_engine.py`.
 
 ### Using it as a module
 
 ```python
-from voice_engine import *  # import the engine class and use it in your own pipeline
+import asyncio
+from voice_engine import VoiceEngine
+
+engine = VoiceEngine(voice="en-GB-RyanNeural", rate="+0%", pitch="+0Hz")
+asyncio.run(engine.generate_audio("Hello from Zarathustra.", "hello.mp3"))
 ```
 
-Check `voice_engine.py` for the class name and its methods.
+`generate_audio` creates the output folder if needed, returns the file path, and raises an exception on failure instead of hiding it.
+
+### Tests
+
+The tests use a stand-in for Edge-TTS, so they need neither internet nor the `edge-tts` package:
+
+```bash
+python tests/test_engine.py
+```
 
 ## ◼ Notes and limitations
 
 - Edge-TTS is an unofficial client for Microsoft's online voices. It needs internet access, and the service can change or limit access at any time.
-- Generated audio and your private scripts are not meant to live in the repository. `script.txt` and `*.mp3` are listed in `.gitignore`.
+- Generated audio does not belong in the repository: `*.mp3` is listed in `.gitignore`. `script.txt` is tracked because it holds the sample text, so keep private scripts under another name (for example `my_essay.txt`).
 - Voice quality depends on the chosen neural voice and the punctuation of the input text.
 
 ## ◼ Roadmap
