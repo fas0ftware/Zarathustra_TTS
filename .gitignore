@@ -182,3 +182,5 @@ cython_debug/
 
 # Generated narration audio
 *.mp3
+.env.*
+!.env.example
