@@ -16,4 +16,4 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - run: python -m unittest discover -v
+      - run: python tests/test_engine.py
