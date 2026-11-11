@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="370" viewBox="0 0 720 370">
+<rect width="100%" height="100%" rx="10" fill="#0d1117" stroke="#30363d"/>
+<rect width="100%" height="32" rx="10" fill="#161b22"/><rect y="22" width="100%" height="10" fill="#161b22"/>
+<circle cx="18" cy="16" r="6" fill="#ff5f56"/><circle cx="38" cy="16" r="6" fill="#ffbd2e"/><circle cx="58" cy="16" r="6" fill="#27c93f"/>
+<text x="360" y="21" fill="#8b949e" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="12" text-anchor="middle">Zarathustra_TTS — live run</text>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" xml:space="preserve">
+<text x="14" y="56" fill="#58a6ff">$ python main.py chapters/ --srt</text>
+<text x="14" y="74" fill="#e6edf3">Voice: en-GB-RyanNeural | rate +0% | pitch +0Hz | volume +0%</text>
+<text x="14" y="92" fill="#e6edf3">[1/2] Reading chapters/abyss.txt: &#x27;A rope over an abyss.&#x27;</text>
+<text x="14" y="110" fill="#e6edf3">[1/2] Saved chapters/abyss.mp3 (14 KiB) + chapters/abyss.srt</text>
+<text x="14" y="128" fill="#e6edf3">[2/2] Reading chapters/intro.txt: &#x27;Man is a rope, tied between beast and overman.&#x27;</text>
+<text x="14" y="146" fill="#e6edf3">[2/2] Saved chapters/intro.mp3 (22 KiB) + chapters/intro.srt</text>
+<text x="14" y="164" fill="#e6edf3"></text>
+<text x="14" y="182" fill="#58a6ff">$ cat chapters/intro.srt</text>
+<text x="14" y="200" fill="#e6edf3">1</text>
+<text x="14" y="218" fill="#e6edf3">00:00:00,100 --&gt; 00:00:03,850</text>
+<text x="14" y="236" fill="#e6edf3">Man is a rope, tied between beast and overman.</text>
+<text x="14" y="254" fill="#e6edf3"></text>
+<text x="14" y="272" fill="#58a6ff">$ python main.py --list-voices en-GB | tail -4</text>
+<text x="14" y="290" fill="#e6edf3">en-GB-RyanNeural                     Male    en-GB</text>
+<text x="14" y="308" fill="#e6edf3">en-GB-SoniaNeural                    Female  en-GB</text>
+<text x="14" y="326" fill="#e6edf3">en-GB-ThomasNeural                   Male    en-GB</text>
+<text x="14" y="344" fill="#e6edf3">5 voice(s)</text>
+</g></svg>
